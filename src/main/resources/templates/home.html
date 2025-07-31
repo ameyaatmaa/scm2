@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Document</title>
+    <link rel="stylesheet" data-th-href="@{'/css/output.css'}">
+
+
+
+    <style>
+        .container{
+
+            margin-inside: var();
+            width: 50%;
+            padding: 20px;
+            background-color: aquamarine;
+        }
+    </style>
+</head>
+<body>
+<h1 class="text-4xl text-red-500 font-bold">Tailwind is working!</h1>
+
+
+<div class="container text-5xl">
+
+    <h1 data-th-text="${title}">Welcome my fiend welcome</h1>
+    <br>
+
+    <h1>Welcome to home page</h1>
+    <br>
+    <p>lorem50 </p>
+
+</div>
+</body>
+</html>
