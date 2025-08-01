@@ -1,10 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" th:replace="~{base :: parent(~{::#content})}" >
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
 </head>
 <body>
-<h1>this is services page</h1>
+<div id="content">
+    <h1>Welcome my friend to services page</h1>
+    <p>We offer a variety of services to meet your needs.</p>
+    <ul>
+        <li>Service 1: Description of service 1.</li>
+        <li>Service 2: Description of service 2.</li>
+        <li>Service 3: Description of service 3.</li>
+    </ul>
+</div>
+
 </body>
 </html>
