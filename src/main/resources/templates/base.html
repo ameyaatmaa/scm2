@@ -1,4 +1,18 @@
-<div
-th:fragment="parent"> This is a poarent fragment
-<p> lorem 50 bjdkbcbdavbavjbda jdavbdj </p>
-</div>
+<!doctype html>
+<html
+        lang="en"
+        th:fragment="parent(content)"
+        xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Base page</title>
+    <link rel="stylesheet" data-th-href="@{'/css/output.css'}">
+</head>
+<body>
+base page content
+<section data-th-replace="${content}"></section>
+
+</body>
+</html>
