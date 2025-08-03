@@ -30,6 +30,5 @@ public class SocialLink {
     private Contact contact;
 
 
-    @OneToMany(mappedBy = "contact", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    private List<SocialLink> links = new ArrayList<>();
+
 }
