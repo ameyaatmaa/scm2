@@ -30,5 +30,13 @@ public class PageController {
         return "services"; // maps to about.html
     }
 
+    @RequestMapping("/register")
+    public String register(Model model) {
+        model.addAttribute("title", "register");
+        System.out.println("register page handler");
+        return "register"; // maps to about.html
+    }
+
+
 
 }
