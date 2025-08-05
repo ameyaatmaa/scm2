@@ -1,6 +1,9 @@
 package com.scm.scm2.controllers;
 
+import com.scm.scm2.entities.User;
 import com.scm.scm2.forms.UserForm;
+import com.scm.scm2.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -10,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class PageController {
+
+    @Autowired
+    private UserService userService;
 
     @RequestMapping("/home")
     public String home(Model model) {
@@ -44,19 +50,29 @@ public class PageController {
         return "register"; // maps to about.html
     }
     // Register processing handelr
-@RequestMapping(value = "/do-register" , method = RequestMethod.POST)
+    @RequestMapping(value = "/do-register", method = RequestMethod.POST)
     public String processRegister(@ModelAttribute UserForm userForm) {
-        System.out.println("do register page handler");
+        try {
+            System.out.println("do register page handler");
 
+            User user = User.builder()
+                    .name(userForm.getName())
+                    .email(userForm.getEmail())
+                    .password(userForm.getPassword())
+                    .about(userForm.getAbout())
+                    .phoneNumber(userForm.getPhoneNumber())
+                    .profilePic("https://your-default-profile-pic-link")
+                    .build();
 
+            User savedUser = userService.saveUser(user);
+            System.out.println("User saved with ID: " + savedUser.getUserId());
 
-
-
-
-
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return "redirect:/register";
-
     }
+
 
 
 }
