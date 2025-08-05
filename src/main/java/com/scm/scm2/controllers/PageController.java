@@ -2,7 +2,10 @@ package com.scm.scm2.controllers;
 
 import com.scm.scm2.entities.User;
 import com.scm.scm2.forms.UserForm;
+import com.scm.scm2.helpers.Message;
+import com.scm.scm2.helpers.MessageType;
 import com.scm.scm2.services.UserService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -51,25 +54,34 @@ public class PageController {
     }
     // Register processing handelr
     @RequestMapping(value = "/do-register", method = RequestMethod.POST)
-    public String processRegister(@ModelAttribute UserForm userForm) {
-        try {
+    public String processRegister(@ModelAttribute UserForm userForm, HttpSession session) {
+
             System.out.println("do register page handler");
 
-            User user = User.builder()
-                    .name(userForm.getName())
-                    .email(userForm.getEmail())
-                    .password(userForm.getPassword())
-                    .about(userForm.getAbout())
-                    .phoneNumber(userForm.getPhoneNumber())
-                    .profilePic("https://your-default-profile-pic-link")
-                    .build();
+//            User user = User.builder()
+//                    .name(userForm.getName())
+//                    .email(userForm.getEmail())
+//                    .password(userForm.getPassword())
+//                    .about(userForm.getAbout())
+//                    .phoneNumber(userForm.getPhoneNumber())
+//                    .profilePic("https://your-default-profile-pic-link")
+//                    .build();
+
+            User user = new User();
+            user.setName(userForm.getName());
+            user.setPassword(userForm.getPassword());
+            user.setEmail(userForm.getEmail());
+            user.setAbout(userForm.getAbout());
+            user.setPhoneNumber(userForm.getPhoneNumber());
+            user.setProfilePic("https://your-default-profile-pic-link");
+
 
             User savedUser = userService.saveUser(user);
             System.out.println("User saved with ID: " + savedUser.getUserId());
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+     Message message =   Message.builder().content("Registration successful!").type(MessageType.green).build();
+
+       session.setAttribute("message",message);
         return "redirect:/register";
     }
 
