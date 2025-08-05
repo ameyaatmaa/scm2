@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 
 @Service
@@ -24,6 +25,9 @@ private UserRepo userRepo;
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     @Override
     public User saveUser(User user) {
+        String userId= UUID.randomUUID().toString();
+    user.setUserId(userId);
+
         return userRepo.save(user);
     }
 
@@ -53,21 +57,28 @@ private UserRepo userRepo;
 
     @Override
     public void deleteUser(String id) {
+        User user2 =  userRepo.findById(id).orElseThrow(()-> new ResourceNotFoundException("User not found"));
+
+         userRepo.delete(user2);
 
     }
 
     @Override
     public boolean isUserExistById(String userId) {
-        return false;
+
+        User user2 =  userRepo.findById(userId).orElse(null);
+        return user2!= null ? true: false;
     }
 
     @Override
     public boolean isUserExistByEmail(String email) {
-        return false;
+
+       User user = userRepo.findByEmail(email).orElse(null);
+        return user!= null ? true: false;
     }
 
     @Override
     public List<User> getAllUsers() {
-        return List.of();
+        return userRepo.findAll();
     }
 }
