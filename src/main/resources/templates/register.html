@@ -7,7 +7,7 @@
 <section id="content">
     <div class="container mx-auto px-4 mt-32 flex justify-center">
         <div class="w-full" style="max-width:798px;">
-            <form data-th-action="@{'/do-register'}" method="post"  th:object="${userForm}"   class="p-8 bg-white border-2 border-gray-300 border-t-blue-200 rounded-xl shadow-lg dark:bg-gray-800 dark:border-gray-600 mt-10">
+            <form data-th-action="@{'/do-register'}" method="post"  th:object="${userForm}"  novalidate  class="p-8 bg-white border-2 border-gray-300 border-t-blue-200 rounded-xl shadow-lg dark:bg-gray-800 dark:border-gray-600 mt-10">
 
                 <h5 class="mb-6 text-3xl font-bold tracking-tight text-gray-900 dark:text-white text-center">Signup Here</h5>
 
@@ -20,6 +20,15 @@
                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Name</label>
                     <input type="text"  th:field="*{name}"  id="name"  placeholder="Enter your full name" required
                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
+
+                    <p
+                            data-th-if="${#fields.hasErrors('name')}"
+                            data-th-errors="*{name}"
+                            class="text-red-600 px-1 py-2"
+                    >
+                        Name is required
+                    </p>
+
                 </div>
 
                 <!-- Email -->
@@ -27,6 +36,16 @@
                     <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Email</label>
                     <input type="email"  th:field="*{email}"  id="email"  placeholder="name@flowbite.com" required
                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
+                    <p
+                            data-th-if="${#fields.hasErrors('email')}"
+                            data-th-errors="*{email}"
+                            class="text-red-600 px-1 py-2"
+                    >
+                        Name is required
+                    </p>
+
+
+
                 </div>
 
                 <!-- Password -->
@@ -34,6 +53,15 @@
                     <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
                     <input type="password"  th:field="*{password}"  id="password"  placeholder="Enter password" required
                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
+
+                    <p
+                            data-th-if="${#fields.hasErrors('name')}"
+                            data-th-errors="*{password}"
+                            class="text-red-600 px-1 py-2"
+                    >
+                        password is required
+                    </p>
+
                 </div>
 
                 <!-- Contact -->
@@ -41,6 +69,15 @@
                     <label for="contact" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contact No.</label>
                     <input type="tel" th:field="*{phoneNumber}"  id="contact"  placeholder="e.g. +91 9876543210" required
                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
+
+                    <p
+                            data-th-if="${#fields.hasErrors('phoneNumber')}"
+                            data-th-errors="*{phoneNumber}"
+                            class="text-red-600 px-1 py-2"
+                    >
+                        PhoneNumber is required
+                    </p>
+
                 </div>
 
                 <!-- About Textarea -->
@@ -48,6 +85,15 @@
                     <label for="about" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">About</label>
                     <textarea id="about"   th:field="*{about}" rows="4" placeholder="Tell us something about yourself..."
                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
+
+                    <p
+                            data-th-if="${#fields.hasErrors('about')}"
+                            data-th-errors="*{about}"
+                            class="text-red-600 px-1 py-2"
+                    >
+                        about is required
+                    </p>
+
                 </div>
 
                 <!-- Buttons -->
