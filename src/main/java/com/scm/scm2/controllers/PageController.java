@@ -54,43 +54,59 @@ public class PageController {
 
         return "register"; // maps to about.html
     }
-    // Register processing handelr
     @RequestMapping(value = "/do-register", method = RequestMethod.POST)
-    public String processRegister(@Valid @ModelAttribute UserForm userForm, BindingResult rBindingResult , HttpSession session) {
+    public String processRegister(@Valid @ModelAttribute UserForm userForm, BindingResult rBindingResult,
+                                  HttpSession session) {
+        System.out.println("Processing registration");
+        // fetch form data
+        // UserForm
+        System.out.println(userForm);
 
-            System.out.println("do register page handler");
+        // validate form data
+        if (rBindingResult.hasErrors()) {
+            return "register";
+        }
 
-            if(rBindingResult.hasErrors()) {
-                return "register";
-            }
+        // TODO::Validate userForm[Next Video]
 
-//          Validator
+        // save to database
 
+        // userservice
 
-//            User user = User.builder()
-//                    .name(userForm.getName())
-//                    .email(userForm.getEmail())
-//                    .password(userForm.getPassword())
-//                    .about(userForm.getAbout())
-//                    .phoneNumber(userForm.getPhoneNumber())
-//                    .profilePic("https://your-default-profile-pic-link")
-//                    .build();
+        // UserForm--> User
+        // User user = User.builder()
+        // .name(userForm.getName())
+        // .email(userForm.getEmail())
+        // .password(userForm.getPassword())
+        // .about(userForm.getAbout())
+        // .phoneNumber(userForm.getPhoneNumber())
+        // .profilePic(
+        // "https://www.learncodewithdurgesh.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fdurgesh_sir.35c6cb78.webp&w=1920&q=75")
+        // .build();
 
-            User user = new User();
-            user.setName(userForm.getName());
-            user.setPassword(userForm.getPassword());
-            user.setEmail(userForm.getEmail());
-            user.setAbout(userForm.getAbout());
-            user.setPhoneNumber(userForm.getPhoneNumber());
-            user.setProfilePic("https://your-default-profile-pic-link");
+        User user = new User();
+        user.setName(userForm.getName());
+        user.setEmail(userForm.getEmail());
+        user.setPassword(userForm.getPassword());
+        user.setAbout(userForm.getAbout());
+        user.setPhoneNumber(userForm.getPhoneNumber());
+        user.setEnabled(false);
+        user.setProfilePic(
+                "https://www.learncodewithdurgesh.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fdurgesh_sir.35c6cb78.webp&w=1920&q=75");
 
+        User savedUser = userService.saveUser(user);
 
-            User savedUser = userService.saveUser(user);
-            System.out.println("User saved with ID: " + savedUser.getUserId());
+        System.out.println("user saved :");
 
-     Message message =   Message.builder().content("Registration successful!").type(MessageType.green).build();
+        // message = "Registration Successful"
 
-       session.setAttribute("message",message);
+        // add the message:
+
+        Message message = Message.builder().content("Registration Successful").type(MessageType.green).build();
+
+        session.setAttribute("message", message);
+
+        // redirectto login page
         return "redirect:/register";
     }
 
