@@ -4,7 +4,7 @@
         th:replace="~{base :: parent(~{::#content},~{::title},~{::script})}"
 >
 <head>
-    <title>Add Contact</title>
+    <title>Update Contact</title>
 </head>
 <body>
 <div id="content">
@@ -25,16 +25,11 @@
                 >
                     <div data-th-replace="message::messagebox"></div>
 
-                    <h1 class="text-2xl font-semibold">Add New Contact</h1>
-                    <p class="text-gray-500">
-                        This contact will be stored on cloud, you can direct email this
-                        client from scm...
-                    </p>
+                    <h1 class="text-2xl font-semibold">Update Contact</h1>
 
                     <form
-                            action=""
                             class="mt-8"
-                            data-th-action="@{'/user/contacts/add'}"
+                            data-th-action="@{'/user/contacts/update/' + ${contactId}}"
                             data-th-object="${contactForm}"
                             method="post"
                             enctype="multipart/form-data"
@@ -227,8 +222,8 @@
                             </p>
 
                             <img
+                                    data-th-src="*{picture}"
                                     class="max-h-52 mx-auto rounded-lg shadow m-3"
-                                    src=""
                                     id="upload_image_preview"
                                     alt=""
                             />
@@ -254,7 +249,7 @@
                                     type="submit"
                                     class="px-3 py-2 dark:bg-blue-600 hover:dark:bg-blue-700 rounded bg-black text-white"
                             >
-                                Add Contact
+                                Update Contact
                             </button>
                             <button
                                     type="reset"

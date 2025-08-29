@@ -31,7 +31,7 @@ public class RootController {
         ;
         String username = Helper.getEmailOfLoggedInUser(authentication);
         logger.info("User logged in: {}", username);
-        // database se data ko fetch : get user from db :
+
         User user = userService.getUserByEmail(username);
         System.out.println(user);
         System.out.println(user.getName());

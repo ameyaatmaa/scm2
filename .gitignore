@@ -1,6 +1,7 @@
 HELP.md
 # Ignore Spring Boot configuration files
 src/main/resources/application.properties
+src/main/resources/application-dev.properties
 
 target/
 .mvn/wrapper/maven-wrapper.jar

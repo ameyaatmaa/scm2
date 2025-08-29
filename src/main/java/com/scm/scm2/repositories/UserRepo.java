@@ -6,10 +6,18 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-@Repository
-public interface UserRepo extends JpaRepository<User,String > {
 
-    //db related methods
+
+@Repository
+public interface UserRepo extends JpaRepository<User, String> {
+    // extra methods db relatedoperations
+    // custom query methods
+    // custom finder methods
 
     Optional<User> findByEmail(String email);
+
+    Optional<User> findByEmailAndPassword(String email, String password);
+
+    Optional<User> findByEmailToken(String id);
+
 }

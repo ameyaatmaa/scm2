@@ -28,7 +28,4 @@ public class SocialLink {
 
     @ManyToOne
     private Contact contact;
-
-
-
 }
